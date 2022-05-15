@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+
+  messenger-service:
+    build: ./messenger-service
+    ports:
+      - "8085:8080"
+    depends_on:
+      - "db"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/messenger_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_DATASOURCE_INITIALIZATION-MODE: always
+      SPRING_DATASOURCE_PLATFORM: postgres
+      SPRING_JPA_HIBERNATE_SHOW-SQL: 'true'
+      SPRING_JPA_SHOW-SQL: 'true'
+      SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL: 'true'
+
+  db:
+    image: postgres
+    ports:
+      - 5432:5432
+    volumes: 
+          - ./db/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+          - ./db/fill_tables.sql:/docker-entrypoint-initdb.d/fill_tables.sql
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: messenger_db
