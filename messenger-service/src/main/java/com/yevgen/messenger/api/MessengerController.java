@@ -33,7 +33,7 @@ public class MessengerController {
     @Autowired
     private IMessengerService messengerService;
 
-    @Operation(summary = "Send message from sender to recipient")
+    @Operation(summary = "Send message from one user to another")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Message successfully sent",
                     content = { @Content(mediaType = "application/json",

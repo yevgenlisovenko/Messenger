@@ -15,6 +15,7 @@ public class SendMessageRequest {
     private Long recipientId;
 
     @NotBlank
+    @Length(max = 1024)
     private String message;
 
     public Long getSenderId() {
