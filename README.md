@@ -8,6 +8,7 @@
 ## Database
 - PostgreSQL.
 - There is one table `messages` and few indexes to speed up queries (see [sql script to initialize messenger DB](https://github.com/yevgenlisovenko/Messenger/blob/dev/db/create_tables.sql)).
+- Please note that the database is the part of the Docker application and will be initialized automatically and running inside container.
 
 ## How to build and run Messenger Service
 1. To build and run the project install using the links below:
