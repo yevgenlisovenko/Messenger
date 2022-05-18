@@ -25,7 +25,7 @@ import java.util.List;
 
 @Tag(name = "Messenger Controller")
 @RestController
-@RequestMapping("/")
+@RequestMapping("/v1/message")
 public class MessengerController {
 
     private static Logger logger = LoggerFactory.getLogger(MessengerController.class);
@@ -39,7 +39,7 @@ public class MessengerController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = SendMessageResponse.class)) })
     })
-    @PostMapping("/v1/message")
+    @PostMapping
     public ResponseEntity<SendMessageResponse> sendMessage(
             @Valid @RequestBody SendMessageRequest request) {
 
@@ -73,7 +73,7 @@ public class MessengerController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = GetMessagesResponse.class)) })
     })
-    @GetMapping( "/v1/message/{recipient-id}/{sender-id}" )
+    @GetMapping( "/{recipient-id}/{sender-id}" )
     public ResponseEntity<GetMessagesResponse> getMessagesBySender(
             @PathVariable(value = "recipient-id") Long recipientId,
             @PathVariable(value = "sender-id") Long senderId,
@@ -111,7 +111,7 @@ public class MessengerController {
                     content = { @Content(mediaType = "application/json",
                             schema = @Schema(implementation = GetMessagesBySendersResponse.class)) })
     })
-    @GetMapping( "/v1/message/{recipient-id}" )
+    @GetMapping( "/{recipient-id}" )
     public ResponseEntity<GetMessagesBySendersResponse> getMessages(
             @PathVariable(value = "recipient-id") Long recipientId,
             @RequestParam(value = "days", required = false) Integer days,
